@@ -1,0 +1,25 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    const int sides = 5; 
+    double pentagon[sides];
+    double perimeter = 0.0;
+
+   
+    cout << "Введіть довжини сторін п'ятикутника:\n";
+    for (int i = 0; i < sides; i++) {
+        cout << "Сторона " << i + 1 << ": ";
+        while (!(cin >> pentagon[i]) || pentagon[i] <= 0) {
+            cout << "Некоректне значення. Будь ласка, введіть додатнє число для сторони " << i + 1 << ": ";
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
+        perimeter += pentagon[i];
+    }
+
+   
+    cout << "Периметр п'ятикутника: " << perimeter << " одиниць.\n";
+
+    return 0;
+}
