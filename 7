@@ -1,0 +1,68 @@
+#include <iostream>
+#include <limits>
+
+int main() {
+    const int N = 10;
+    double arr[N];
+    
+    for (int i = 0; i < N; ++i) {
+        std::cin >> arr[i];
+    }
+    
+    double sum_negative = 0.0;
+    for (int i = 0; i < N; ++i) {
+        if (arr[i] < 0) {
+            sum_negative += arr[i];
+        }
+    }
+    
+    double min_element = arr[0];
+    double max_element = arr[0];
+    int min_index = 0, max_index = 0;
+    for (int i = 1; i < N; ++i) {
+        if (arr[i] < min_element) {
+            min_element = arr[i];
+            min_index = i;
+        }
+        if (arr[i] > max_element) {
+            max_element = arr[i];
+            max_index = i;
+        }
+    }
+    
+    double product_between_min_max = 1.0;
+    int start_index = std::min(min_index, max_index) + 1;
+    int end_index = std::max(min_index, max_index) - 1;
+    for (int i = start_index; i <= end_index; ++i) {
+        product_between_min_max *= arr[i];
+    }
+    
+    double product_even_indices = 1.0;
+    for (int i = 0; i < N; i += 2) {
+        product_even_indices *= arr[i];
+    }
+    
+    double sum_between_first_last_negative = 0.0;
+    int first_negative_index = -1, last_negative_index = -1;
+    for (int i = 0; i < N; ++i) {
+        if (arr[i] < 0) {
+            if (first_negative_index == -1) {
+                first_negative_index = i;
+            }
+            last_negative_index = i;
+        }
+    }
+    
+    if (first_negative_index != -1 && last_negative_index != -1) {
+        for (int i = first_negative_index + 1; i < last_negative_index; ++i) {
+            sum_between_first_last_negative += arr[i];
+        }
+    }
+    
+    std::cout << sum_negative << std::endl;
+    std::cout << product_between_min_max << std::endl;
+    std::cout << product_even_indices << std::endl;
+    std::cout << sum_between_first_last_negative << std::endl;
+    
+    return 0;
+}
