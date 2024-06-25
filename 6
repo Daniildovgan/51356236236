@@ -1,0 +1,33 @@
+#include <iostream>
+#include <limits>
+
+int main() {
+    const int months = 12;
+    double profit[months];
+    int start_month, end_month;
+    
+    for (int i = 0; i < months; ++i) {
+        std::cin >> profit[i];
+    }
+    
+    std::cin >> start_month >> end_month;
+    
+    double max_profit = std::numeric_limits<double>::min();
+    double min_profit = std::numeric_limits<double>::max();
+    int max_month, min_month;
+    
+    for (int i = start_month - 1; i <= end_month - 1; ++i) {
+        if (profit[i] > max_profit) {
+            max_profit = profit[i];
+            max_month = i + 1;
+        }
+        if (profit[i] < min_profit) {
+            min_profit = profit[i];
+            min_month = i + 1;
+        }
+    }
+    
+    std::cout << max_month << " " << min_month << std::endl;
+    
+    return 0;
+}
